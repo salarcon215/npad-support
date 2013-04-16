@@ -34,7 +34,7 @@ pushd $SOURCE_DIR/web100-userland
 popd
 
 # build NPAD
-pushd npad
+pushd $SOURCE_DIR/npad
     export LD_LIBRARY_PATH=/home/iupui_npad/build/lib/
     export PYTHONPATH=/home/iupui_npad/build/lib/python2.6/site-packages/
     cp $SOURCE_DIR/$SOURCE_DIR/conf/config.xml ./
