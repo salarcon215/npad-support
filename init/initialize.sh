@@ -43,6 +43,7 @@ fi
 pushd $SLICEHOME/VAR
 
     mkdir -p logs run
+    chown -R $SLICENAME:slices logs run
 
     echo "Capture our idenity and its various attributes"
     rm -f MYADDR MYFQDN MYLOCATION MYNODE LOCATION
@@ -91,5 +92,5 @@ sed -e "s;RSYNCDIR_SS;$RSYNCDIR_SS;" -e "s;RSYNCDIR_NPAD;$RSYNCDIR_NPAD;" \
     $SLICEHOME/conf/rsyncd.conf.in > /etc/rsyncd.conf
 mkdir -p $RSYNCDIR_SS
 mkdir -p $RSYNCDIR_NPAD
-chown -R $SLICENAME.slices /var/spool/$SLICENAME
+chown -R $SLICENAME:slices /var/spool/$SLICENAME
 service rsyncd restart
