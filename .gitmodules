@@ -7,3 +7,6 @@
 [submodule "sidestream"]
 	path = sidestream
 	url = git@github.com:npad/sidestream.git
+[submodule "package"]
+	path = package
+	url = https://github.com/m-lab-tools/package.git

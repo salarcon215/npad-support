@@ -9,11 +9,11 @@ cd $SLICEHOME
 set -e
 
 echo Kill any prior servers
-service httpd stop		|| true
-$SLICEHOME/init/stop.sh		|| true
+service httpd stop          || true
+$SLICEHOME/init/stop.sh     || true
 # Brutal workaround for buggy daemon scripts
-killall /usr/bin/python		|| true
-killall /usr/sbin/tcpdump	|| true
+killall /usr/bin/python     || true
+killall /usr/sbin/tcpdump   || true
 
 echo "Install httpd and perform System Update"
 # echo "Check/Install system tools"
@@ -21,14 +21,12 @@ echo "Install httpd and perform System Update"
     (
         rm -f $SLICEHOME/.yumdone*
         yum install -y httpd
-        yum install -y http://mirrors.kernel.org/fedora-epel/6/i386/epel-release-6-8.noarch.rpm
         yum install -y gnuplot-py
         yum install -y gnuplot
         touch $SLICEHOME/.yumdone2
     )
 # make sure that everything is up to date
 yum update -y
-chkconfig httpd on
 
 # Enable/disable VSYS based on OS version
 if [[ $( uname -r ) =~ 2.6.22.* ]] ; then
@@ -85,6 +83,7 @@ echo "Configure httpd"
 cp -f /etc/httpd/conf/httpd.conf $SLICEHOME/conf/httpd.conf.original
 sed "s/MYFQDN/$MYFQDN/" $SLICEHOME/conf/httpd.conf.npad > /etc/httpd/conf/httpd.conf
 sed "s;LOCATION;$MYLOCATION;" $SLICEHOME/conf/diag_form.html > $SLICEHOME/VAR/www/index.html
+chkconfig httpd on
 service httpd start
 
 # NOTE: this is forcibly over-writing a pre-existing config within the slicebase.
