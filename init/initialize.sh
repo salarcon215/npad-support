@@ -42,7 +42,7 @@ fi
 # create directories as the user.
 pushd $SLICEHOME/VAR
 
-    sudo -u $SLICENAME mkdir -p logs run
+    mkdir -p logs run
 
     echo "Capture our idenity and its various attributes"
     rm -f MYADDR MYFQDN MYLOCATION MYNODE LOCATION
