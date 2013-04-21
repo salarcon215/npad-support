@@ -89,6 +89,7 @@ service httpd start
 # NOTE: this is forcibly over-writing a pre-existing config within the slicebase.
 sed -e "s;RSYNCDIR_SS;$RSYNCDIR_SS;" -e "s;RSYNCDIR_NPAD;$RSYNCDIR_NPAD;" \
     $SLICEHOME/conf/rsyncd.conf.in > /etc/rsyncd.conf
-sudo -u $SLICENAME mkdir -p $RSYNCDIR_SS
-sudo -u $SLICENAME mkdir -p $RSYNCDIR_NPAD
+mkdir -p $RSYNCDIR_SS
+mkdir -p $RSYNCDIR_NPAD
+chown -R $SLICENAME.slices /var/spool/$SLICENAME
 service rsyncd restart
