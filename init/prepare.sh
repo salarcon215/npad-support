@@ -35,8 +35,8 @@ popd
 
 # build NPAD
 pushd $SOURCE_DIR/npad
-    export LD_LIBRARY_PATH=/home/iupui_npad/build/lib/
-    export PYTHONPATH=/home/iupui_npad/build/lib/python2.6/site-packages/
+    export LD_LIBRARY_PATH=$BUILD_DIR/build/lib/
+    export PYTHONPATH=$BUILD_DIR/build/lib/python2.6/site-packages/
     cp $SOURCE_DIR/conf/config.xml ./
     ./config.py -a
     (cd pathdiag; make saveswig)
