@@ -23,6 +23,7 @@ echo "Install httpd and perform System Update"
         yum install -y httpd
         yum install -y gnuplot-py
         yum install -y gnuplot
+        yum install -y paris-traceroute
         touch $SLICEHOME/.yumdone2
     )
 # make sure that everything is up to date
@@ -31,11 +32,11 @@ yum update -y
 # Enable/disable VSYS based on OS version
 if [[ $( uname -r ) =~ 2.6.22.* ]] ; then
     echo "Removing /etc/web100_vsys.conf"
-    rm -f /etc/web100_vsys.conf 
+    rm -f /etc/web100_vsys.conf
 elif [[ $( uname -r ) =~ 2.6.32.* ]] ; then
     echo "Creating /etc/web100_vsys.conf"
-    echo "1" > /etc/web100_vsys.conf 
-else 
+    echo "1" > /etc/web100_vsys.conf
+else
     echo "Unknown kernel version: " `uname -r`
 fi
 
