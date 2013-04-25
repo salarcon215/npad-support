@@ -72,6 +72,7 @@ cp -f $SOURCE_DIR/sidestream/doside $BUILD_DIR/build/bin
 cp -f $SOURCE_DIR/sidestream/exitstats.py $BUILD_DIR/build/bin
 cp -f $SOURCE_DIR/sidestream/tdump8000.py $BUILD_DIR/build/bin
 cp -f $SOURCE_DIR/sidestream/mkSample.py $BUILD_DIR/build/bin
+cp -f $SOURCE_DIR/sidestream/paris-traceroute.py $BUILD_DIR/build/bin
 
 # ensure environment variables point to the build/* directory
 cat <<\EOF > $BUILD_DIR/.bash_profile
@@ -85,6 +86,7 @@ cat <<\EOF > $BUILD_DIR/conf/config.sh
 RSYNCDIR=/var/spool/iupui_npad
 RSYNCDIR_SS=/var/spool/iupui_npad/SideStream
 RSYNCDIR_NPAD=/var/spool/iupui_npad/NPAD.v1
+RSYNCDIR_PTR=/var/spool/iupui_npad/paris-traceroute
 
 # read local values into variables
 MYNODE=`cat $SLICEHOME/VAR/MYNODE 2> /dev/null`
