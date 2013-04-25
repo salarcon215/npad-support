@@ -19,3 +19,12 @@ port=7999
     transfer logging = no
     ignore errors = no
     ignore nonreadable = yes
+
+[paris-traceroute]
+    comment = Paris traceoute traces.
+    path = RSYNCDIR_PTR
+    list = yes
+    read only = yes
+    transfer logging = no
+    ignore errors = no
+    ignore nonreadable = yes
