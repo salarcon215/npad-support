@@ -20,9 +20,7 @@ echo "Install httpd and perform System Update"
 [ -f $SLICEHOME/.yumdone2 ] || \
     (
         rm -f $SLICEHOME/.yumdone*
-        yum install -y httpd
-        yum install -y gnuplot-py
-        yum install -y gnuplot
+        yum install -y httpd gnuplot-py gnuplot
         yum install -y paris-traceroute
         touch $SLICEHOME/.yumdone2
     )
@@ -38,6 +36,12 @@ elif [[ $( uname -r ) =~ 2.6.32.* ]] ; then
     echo "1" > /etc/web100_vsys.conf
 else
     echo "Unknown kernel version: " `uname -r`
+fi
+
+if [ ! -f .side_samples_done ]; then
+   mkdir -p $SLICEHOME/VAR/www/Sample
+   (cd $SLICEHOME/VAR/www/Sample; mkSample.py)
+   touch .side_samples_done
 fi
 
 # create directories as the user.
