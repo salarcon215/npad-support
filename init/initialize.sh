@@ -20,9 +20,7 @@ echo "Install httpd and perform System Update"
 [ -f $SLICEHOME/.yumdone2 ] || \
     (
         rm -f $SLICEHOME/.yumdone*
-        yum install -y httpd
-        yum install -y gnuplot-py
-        yum install -y gnuplot
+        yum install -y httpd gnuplot-py gnuplot
         yum install -y paris-traceroute
         touch $SLICEHOME/.yumdone2
     )
@@ -38,6 +36,12 @@ elif [[ $( uname -r ) =~ 2.6.32.* ]] ; then
     echo "1" > /etc/web100_vsys.conf
 else
     echo "Unknown kernel version: " `uname -r`
+fi
+
+if [ ! -f .side_samples_done ]; then
+   mkdir -p $SLICEHOME/VAR/www/Sample
+   (cd $SLICEHOME/VAR/www/Sample; mkSample.py)
+   touch .side_samples_done
 fi
 
 # create directories as the user.
@@ -89,9 +93,13 @@ chkconfig httpd on
 service httpd start
 
 # NOTE: this is forcibly over-writing a pre-existing config within the slicebase.
-sed -e "s;RSYNCDIR_SS;$RSYNCDIR_SS;" -e "s;RSYNCDIR_NPAD;$RSYNCDIR_NPAD;" \
+sed -e "s;RSYNCDIR_SS;$RSYNCDIR_SS;" \
+    -e "s;RSYNCDIR_NPAD;$RSYNCDIR_NPAD;" \
+    -e "s;RSYNCDIR_PTR;$RSYNCDIR_PTR;" \
     $SLICEHOME/conf/rsyncd.conf.in > /etc/rsyncd.conf
 mkdir -p $RSYNCDIR_SS
 mkdir -p $RSYNCDIR_NPAD
+mkdir -p $RSYNCDIR_PTR
 chown -R $SLICENAME:slices /var/spool/$SLICENAME
+# NOTE: Restart, since we just modified the config.
 service rsyncd restart

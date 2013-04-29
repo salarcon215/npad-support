@@ -21,4 +21,4 @@ fi
 ${DIAG_SERVER_DAEMON} ${DIAG_SERVER_OPTS}
 echo "NPAD server started."
 $SLICEHOME/build/redisplay.py -daemon $SLICEHOME/VAR/www/ServerData $RSYNCDIR_NPAD $MYNODE &
-sudo -i -u $SLICENAME $SLICEHOME/build/bin/doside
+HOME=$SLICEHOME $SLICEHOME/build/bin/doside
