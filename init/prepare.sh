@@ -77,7 +77,7 @@ cp -f $SOURCE_DIR/sidestream/paris-traceroute.py $BUILD_DIR/build/bin
 # ensure environment variables point to the build/* directory
 cat <<\EOF > $BUILD_DIR/.bash_profile
 source /etc/mlab/slice-functions
-export PATH=$PATH:$SLICEHOME/build/bin:$SLICEHOME/build
+export PATH=$PATH:$SLICEHOME/build/bin:$SLICEHOME/build:/usr/local/bin/
 export LD_LIBRARY_PATH=$SLICEHOME/build/lib
 export PYTHONPATH=$SLICEHOME/build/lib/python2.6/site-packages
 EOF
