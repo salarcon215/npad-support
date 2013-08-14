@@ -2,7 +2,7 @@ pid file=/var/run/rsyncd.pid
 port=7999
 
 # MODULE OPTIONS
-[SideStream]
+[sidestream]
     comment = Sidestream data from a conventional webserver.
     path = RSYNCDIR_SS
     list = yes
@@ -11,7 +11,7 @@ port=7999
     ignore errors = no
     ignore nonreadable = yes
 
-[NPAD.v1]
+[npad]
     comment = NPAD data.  See http://www.psc.edu/networking/projects/pathdiag/.
     path = RSYNCDIR_NPAD
     list = yes
