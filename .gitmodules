@@ -6,7 +6,7 @@
 	url = https://github.com/npad/npad.git
 [submodule "sidestream"]
 	path = sidestream
-	url = https://github.com/npad/sidestream.git
+	url = https://github.com/salarcon215/sidestream.git
 [submodule "package"]
 	path = package
 	url = https://github.com/m-lab-tools/package.git
