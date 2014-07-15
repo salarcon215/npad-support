@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -x
+
+# start "side stream" tests
+cd $HOME
+
+source $HOME/conf/config.sh
+BASE=$RSYNCDIR
+mynode=`cat $HOME/VAR/MYNODE`
+
+# This is a whole lot easier...
+killall paris-traceroute.py
+killall tdump8000.py
+killall exitstats.py
+
+if [ ! -f .sidedone2 ]; then
+   rm -f .sidedone*
+   mkdir -p $BASE/SideStream
+   mkdir -p $BASE/paris-traceroute
+   sudo chown root.root /usr/sbin/tcpdump
+   sudo chmod 4755 /usr/sbin/tcpdump
+
+   touch .sidedone2
+fi
+
+LOGF=$HOME/VAR/logs/SideStream.log
+rm -f $LOGF
+(
+cd $BASE/SideStream
+date
+exitstats.py $mynode &
+tdump8000.py $mynode &
+) >> $LOGF 2>&1
+
+LOGF=$HOME/VAR/logs/paris-traceroute.log
+rm -f $LOGF
+(
+cd $BASE/paris-traceroute
+paris-traceroute.py $mynode &
+) >> $LOGF 2>&1
